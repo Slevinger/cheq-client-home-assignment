@@ -1,10 +1,10 @@
 import createDataContext from "./createDataContext";
 import vastsReducer, { initialState } from "./reducers/vastsReducer";
 import axios, {
-  getVastsApiCall,
-  createVastApiCall,
-  updateVastApiCall,
-  removeVastApiCall
+  callGetVastsApi,
+  callCreateVastApi,
+  callUpdateVastApi,
+  callRemoveVastApi
 } from "../api/vastsApi";
 import {
   ADD_VAST,
@@ -22,13 +22,8 @@ const catchError = (err, dispatch) => {
 
 const addVast = dispatch => async ({ position, width, height, vastUrl }) => {
   try {
-    const { data: vast } = await createVastApiCall(
-      position,
-      height,
-      width,
-      vastUrl
-    );
-    debugger;
+    const vast = await callCreateVastApi(position, height, width, vastUrl);
+
     dispatch({ type: ADD_VAST, payload: { vast } });
   } catch (err) {
     catchError(err, dispatch);
@@ -37,8 +32,8 @@ const addVast = dispatch => async ({ position, width, height, vastUrl }) => {
 
 const updateVast = dispatch => async vast => {
   try {
-    const { data } = await updateVastApiCall(vast);
-    dispatch({ type: UPDATE_VAST, payload: { patched: data } });
+    const patched = await callUpdateVastApi(vast);
+    dispatch({ type: UPDATE_VAST, payload: { patched } });
   } catch (err) {
     catchError(err, dispatch);
   }
@@ -46,7 +41,7 @@ const updateVast = dispatch => async vast => {
 
 const fetchVasts = dispatch => async () => {
   try {
-    const vasts = await getVastsApiCall();
+    const vasts = await callGetVastsApi();
     dispatch({ type: SET_VASTS, payload: { vasts } });
   } catch (err) {
     catchError(err, dispatch);
@@ -55,7 +50,7 @@ const fetchVasts = dispatch => async () => {
 
 const removeVast = dispatch => async id => {
   try {
-    await removeVastApiCall(id);
+    await callRemoveVastApi(id);
     dispatch({ type: REMOVE_VAST, payload: { id } });
   } catch (err) {
     catchError(err, dispatch);

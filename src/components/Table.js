@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
 
@@ -20,7 +20,7 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import { TableXMLIcon } from "./icons";
 
 import { Context as VastsContext } from "../context/VastsContext";
-import { getVastXmlApiCall } from "../api/vastsApi";
+import { callGetVastXmlApi } from "../api/vastsApi";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -62,7 +62,7 @@ export default function MaterialTableDemo() {
   }, []);
 
   const xmlClicked = useCallback(async id => {
-    const xml = await getVastXmlApiCall(id);
+    const xml = await callGetVastXmlApi(id);
     let blob = new Blob([xml], { type: "text/xml" });
     let url = URL.createObjectURL(blob);
     window.open(url);

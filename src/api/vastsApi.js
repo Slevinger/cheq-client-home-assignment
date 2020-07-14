@@ -5,7 +5,7 @@ const instance = axios.create({
   baseURL: url
 });
 
-export const getVastsApiCall = async () => {
+export const callGetVastsApi = async () => {
   const {
     data: { vasts }
   } = await instance.get("/fetch_vasts");
@@ -17,41 +17,40 @@ export const getVastApiCall = async id => {
   return vast;
 };
 
-export const createVastApiCall = async (position, width, height, vastUrl) => {
-  const vast = await instance.post("/create_vast", {
+export const callCreateVastApi = async (position, width, height, vastUrl) => {
+  const { data } = await instance.post("/create_vast", {
     position,
     height,
     width,
     vastUrl
   });
-  return vast;
+  return data;
 };
-export const updateVastApiCall = async ({
+export const callUpdateVastApi = async ({
   vastId,
   position,
   width,
   height,
   vastUrl
 }) => {
-  const patched = await instance.post("/edit_vast", {
+  const { data } = await instance.post("/edit_vast", {
     vastId,
     position,
     height,
     width,
     vastUrl
   });
-  return patched;
+  return data;
 };
 
-export const removeVastApiCall = async id => {
+export const callRemoveVastApi = async id => {
   const { data } = await instance.delete(`?id=${id}`);
   return data;
 };
 
-export const getVastXmlApiCall = async id => {
-  const { data: xml } = await instance.get(`?id=${id}`);
-
-  return xml;
+export const callGetVastXmlApi = async id => {
+  const data = await instance.get(`?id=${id}`);
+  return data;
 };
 
 export default instance;
