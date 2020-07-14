@@ -9,8 +9,7 @@ import {
 export const initialState = {
   vasts: [],
   loading: false,
-  error: "",
-  meta: {}
+  error: ""
 };
 
 export default (state, { type, payload }) => {
@@ -48,17 +47,23 @@ export default (state, { type, payload }) => {
         loading: false,
         error: ""
       };
-      break;
+
     case REMOVE_VAST:
       const { id } = payload;
+      const remainingIds = Object.keys(state.vasts).filter(
+        vastId => vastId != id
+      );
 
       return {
         ...state,
-        vasts: Object.keys(state.vasts).filter(vast => vast.id !== id),
+        vasts: remainingIds.reduce(
+          (acc, id) => ({ ...acc, [id]: state.vasts[id] }),
+          {}
+        ),
         loading: false,
         error: ""
       };
-      break;
+
     default:
       return state;
   }

@@ -14,6 +14,12 @@ import {
   REMOVE_VAST
 } from "./actionTypes/vastsActions";
 
+const catchError = (err, dispatch) => {
+  const errorMessage = err.response ? err.response.data : err.message;
+  console.error(errorMessage);
+  dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
+};
+
 const addVast = dispatch => async ({ position, width, height, vastUrl }) => {
   try {
     const { data: vast } = await createVastApiCall(
@@ -25,32 +31,16 @@ const addVast = dispatch => async ({ position, width, height, vastUrl }) => {
     debugger;
     dispatch({ type: ADD_VAST, payload: { vast } });
   } catch (err) {
-    const errorMessage = err.response ? err.response.data : err.message;
-    console.error(errorMessage);
-    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
+    catchError(err, dispatch);
   }
 };
 
-const updateVast = dispatch => async ({
-  vastId,
-  position,
-  width,
-  height,
-  vastUrl
-}) => {
+const updateVast = dispatch => async vast => {
   try {
-    const { data } = await updateVastApiCall({
-      vastId,
-      position,
-      height,
-      width,
-      vastUrl
-    });
+    const { data } = await updateVastApiCall(vast);
     dispatch({ type: UPDATE_VAST, payload: { patched: data } });
   } catch (err) {
-    const errorMessage = err.response ? err.response.data : err.message;
-    console.error(errorMessage);
-    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
+    catchError(err, dispatch);
   }
 };
 
@@ -59,20 +49,16 @@ const fetchVasts = dispatch => async () => {
     const vasts = await getVastsApiCall();
     dispatch({ type: SET_VASTS, payload: { vasts } });
   } catch (err) {
-    const errorMessage = err.response ? err.response.data : err.message;
-    console.error(errorMessage);
-    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
+    catchError(err, dispatch);
   }
 };
 
 const removeVast = dispatch => async id => {
   try {
-    const res = await removeVastApiCall(id);
+    await removeVastApiCall(id);
     dispatch({ type: REMOVE_VAST, payload: { id } });
   } catch (err) {
-    const errorMessage = err.response ? err.response.data : err.message;
-    console.error(errorMessage);
-    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
+    catchError(err, dispatch);
   }
 };
 

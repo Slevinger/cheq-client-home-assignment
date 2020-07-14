@@ -67,8 +67,6 @@ export default function MaterialTableDemo() {
     let url = URL.createObjectURL(blob);
     window.open(url);
     URL.revokeObjectURL(url); //Releases the resources
-
-    debugger;
   }, []);
 
   const [state, setState] = React.useState({
@@ -91,15 +89,9 @@ export default function MaterialTableDemo() {
           );
         }
       }
-
-      // {
-      //   title: 'Birth Place',
-      //   field: 'birthCity',
-      //   lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-      // },
     ]
   });
-  debugger;
+
   return (
     <MaterialTable
       title={
