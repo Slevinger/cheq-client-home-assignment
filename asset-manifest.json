@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/cheq-client-home-assignment/static/css/main.5f361e03.chunk.css",
-    "main.js": "/cheq-client-home-assignment/static/js/main.75d7dd9d.chunk.js",
-    "main.js.map": "/cheq-client-home-assignment/static/js/main.75d7dd9d.chunk.js.map",
+    "main.js": "/cheq-client-home-assignment/static/js/main.28806a9e.chunk.js",
+    "main.js.map": "/cheq-client-home-assignment/static/js/main.28806a9e.chunk.js.map",
     "runtime-main.js": "/cheq-client-home-assignment/static/js/runtime-main.2fe75453.js",
     "runtime-main.js.map": "/cheq-client-home-assignment/static/js/runtime-main.2fe75453.js.map",
     "static/js/2.345eb8ae.chunk.js": "/cheq-client-home-assignment/static/js/2.345eb8ae.chunk.js",
     "static/js/2.345eb8ae.chunk.js.map": "/cheq-client-home-assignment/static/js/2.345eb8ae.chunk.js.map",
     "index.html": "/cheq-client-home-assignment/index.html",
-    "precache-manifest.092c778aa2c6e3f6083ef98b2e265a2d.js": "/cheq-client-home-assignment/precache-manifest.092c778aa2c6e3f6083ef98b2e265a2d.js",
+    "precache-manifest.fb0019acfcca507dff47a413f165db03.js": "/cheq-client-home-assignment/precache-manifest.fb0019acfcca507dff47a413f165db03.js",
     "service-worker.js": "/cheq-client-home-assignment/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/cheq-client-home-assignment/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.345eb8ae.chunk.js.LICENSE.txt": "/cheq-client-home-assignment/static/js/2.345eb8ae.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2fe75453.js",
     "static/js/2.345eb8ae.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.75d7dd9d.chunk.js"
+    "static/js/main.28806a9e.chunk.js"
   ]
 }
