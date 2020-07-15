@@ -1,8 +1,8 @@
 import axios from "axios";
-import { url } from "../const/config";
+import { vastServiceUrl } from "../const/config";
 
 const instance = axios.create({
-  baseURL: url
+  baseURL: vastServiceUrl
 });
 
 export const callGetVastsApi = async () => {
