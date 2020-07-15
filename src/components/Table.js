@@ -49,7 +49,7 @@ export default () => {
         { title: "Width", field: "width", type: "numeric" },
         { title: "Height", field: "height", type: "numeric" },
         {
-          title: "Actions",
+          title: "More...",
           align: "center",
           readOnly: true,
 
