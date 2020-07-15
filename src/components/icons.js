@@ -46,7 +46,9 @@ export const TableXMLIcon = props => {
 };
 
 export const tableIcons = {
-  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+  Add: forwardRef((props, ref) => (
+    <AddBox fontSize="large" color="secondary" {...props} ref={ref} />
+  )),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
   Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
   Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),

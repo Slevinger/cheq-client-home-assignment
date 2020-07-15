@@ -50,7 +50,7 @@ export default () => {
         { title: "Height", field: "height", type: "numeric" },
         {
           title: "Actions",
-          align: "right",
+          align: "center",
           readOnly: true,
 
           render: ({ id, ...rest }) => {
