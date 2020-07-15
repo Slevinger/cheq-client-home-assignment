@@ -13,6 +13,7 @@ export const initialState = {
 };
 
 export default (state, { type, payload }) => {
+  debugger;
   switch (type) {
     case SET_ERROR:
       const { error } = payload;

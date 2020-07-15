@@ -14,19 +14,26 @@ import {
   SET_ERROR
 } from "./actionTypes/vastsActions";
 
-const catchError = (err, dispatch) => {
-  const errorMessage = err.response ? err.response.data : err.message;
-  console.error(errorMessage);
-  dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
+const catchErrorMessage = err => {
+  debugger;
+
+  const errorMessage = err.response ? err.response.data.message : err.message;
+  return errorMessage;
+};
+
+const setError = dispatch => message => {
+  dispatch({ type: SET_ERROR, payload: { error: message } });
 };
 
 const addVast = dispatch => async ({ position, width, height, vastUrl }) => {
   try {
     const vast = await callCreateVastApi(position, height, width, vastUrl);
-
+    debugger;
     dispatch({ type: ADD_VAST, payload: { vast } });
   } catch (err) {
-    catchError(err, dispatch);
+    debugger;
+    const errorMessage = catchErrorMessage(err);
+    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
   }
 };
 
@@ -35,7 +42,8 @@ const updateVast = dispatch => async vast => {
     const patched = await callUpdateVastApi(vast);
     dispatch({ type: UPDATE_VAST, payload: { patched } });
   } catch (err) {
-    catchError(err, dispatch);
+    const errorMessage = catchErrorMessage(err);
+    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
   }
 };
 
@@ -44,7 +52,8 @@ const fetchVasts = dispatch => async () => {
     const vasts = await callGetVastsApi();
     dispatch({ type: SET_VASTS, payload: { vasts } });
   } catch (err) {
-    catchError(err, dispatch);
+    const errorMessage = catchErrorMessage(err);
+    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
   }
 };
 
@@ -53,7 +62,8 @@ const removeVast = dispatch => async id => {
     await callRemoveVastApi(id);
     dispatch({ type: REMOVE_VAST, payload: { id } });
   } catch (err) {
-    catchError(err, dispatch);
+    const errorMessage = catchErrorMessage(err);
+    dispatch({ type: SET_ERROR, payload: { error: errorMessage } });
   }
 };
 
@@ -63,7 +73,8 @@ export const { Provider, Context } = createDataContext(
     addVast,
     updateVast,
     fetchVasts,
-    removeVast
+    removeVast,
+    setError
   },
   initialState
 );

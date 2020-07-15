@@ -1,43 +1,28 @@
-import React, {
-  useContext,
-  useEffect,
-  useCallback,
-  useState,
-  useMemo
-} from "react";
+import React, { useContext, useEffect, useCallback, useMemo } from "react";
 import MaterialTable from "material-table";
-import { makeStyles } from "@material-ui/core/styles";
-
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
-
 import { Context as VastsContext } from "../context/VastsContext";
 import { callGetVastXmlApi } from "../api/vastsApi";
 import { TableXMLIcon, tableIcons } from "./icons";
 import { openXmlInNewTab } from "../utils/XML";
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
-  }
-}));
+const positionValues = [
+  "top_left",
+  "top_middle",
+  "top_right",
+  "middle_left",
+  "middle_right",
+  "middle_middle",
+  "bottom_left",
+  "bottom_middle",
+  "bottom_right"
+];
 
 export default () => {
   const {
-    state: { vasts, error },
-    fetchVasts,
-    addVast,
-    updateVast,
-    removeVast
+    state: { vasts },
+    ...actions
   } = useContext(VastsContext);
-
+  const { fetchVasts, addVast, updateVast, removeVast } = actions;
   useEffect(() => {
     if (vasts.length === 0) {
       fetchVasts();
@@ -53,7 +38,14 @@ export default () => {
     () => ({
       columns: [
         { title: "Vast Url", field: "vastUrl" },
-        { title: "Position", field: "position" },
+        {
+          title: "Position",
+          field: "position",
+          lookup: positionValues.reduce(
+            (acc, position) => ({ ...acc, [position]: position }),
+            {}
+          )
+        },
         { title: "Width", field: "width", type: "numeric" },
         { title: "Height", field: "height", type: "numeric" },
         {
@@ -61,13 +53,9 @@ export default () => {
           align: "right",
           readOnly: true,
 
-          render: (rowData, ...args) => {
-            return (
-              <TableXMLIcon
-                onClick={() => xmlClicked(rowData.id)}
-                id={rowData.id}
-              />
-            );
+          render: ({ id, ...rest }) => {
+            debugger;
+            return <TableXMLIcon onClick={() => xmlClicked(id)} id={id} />;
           }
         }
       ]
@@ -77,28 +65,14 @@ export default () => {
 
   return (
     <MaterialTable
-      title={
-        <div style={{ display: "flex" }}>
-          <span style={{ flex: 1, fontSize: "2rem" }}>Vasts Table</span>
-          {error && (
-            <div
-              style={{
-                marginLeft: "30px",
-                color: "red",
-                alignSelf: "flex-end"
-              }}
-            >
-              ({error.message})
-            </div>
-          )}
-        </div>
-      }
+      title={"Vasts Table"}
       columns={state.columns}
       data={Object.values(vasts)}
       icons={tableIcons}
       editable={{
         onRowAdd: async newData => {
           console.log("addRow", newData);
+          debugger;
           await addVast(newData);
         },
         onRowUpdate: async (newData, oldData) => {

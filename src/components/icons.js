@@ -19,11 +19,15 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import styled from "styled-components";
 
-const TableIcon = styled.div`
+const GrayBG = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
-  display: inline;
   padding: 6px;
   border-radius: 5px;
+`;
+const XmlIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   &:hover {
     cursor: pointer;
   }
@@ -31,11 +35,13 @@ const TableIcon = styled.div`
 
 export const TableXMLIcon = props => {
   return (
-    <TableIcon {...props}>
-      <NavigateBeforeIcon style={{ verticalAlign: "bottom" }} />
-      <span>Xml</span>
-      <NavigateNextIcon style={{ verticalAlign: "bottom" }} />
-    </TableIcon>
+    <XmlIcon {...props}>
+      <GrayBG>
+        <NavigateBeforeIcon style={{ verticalAlign: "bottom" }} />
+        <span>Xml</span>
+        <NavigateNextIcon style={{ verticalAlign: "bottom" }} />
+      </GrayBG>
+    </XmlIcon>
   );
 };
 
