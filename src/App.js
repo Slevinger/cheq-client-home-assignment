@@ -6,9 +6,7 @@ import "./App.css";
 function App() {
   return (
     <VastsProvider>
-      <div className="App">
-        <Table />
-      </div>
+      <Table />
     </VastsProvider>
   );
 }

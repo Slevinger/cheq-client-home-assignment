@@ -17,7 +17,7 @@ export const TableXMLIcon = props => {
   return (
     <TableIcon {...props}>
       <NavigateBeforeIcon style={{ verticalAlign: "bottom" }} />
-      <text>Xml</text>
+      <span>Xml</span>
       <NavigateNextIcon style={{ verticalAlign: "bottom" }} />
     </TableIcon>
   );

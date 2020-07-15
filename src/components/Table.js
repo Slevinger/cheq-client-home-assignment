@@ -46,7 +46,7 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-export default function MaterialTableDemo() {
+export default () => {
   const {
     state: { vasts, error },
     fetchVasts,
@@ -124,4 +124,4 @@ export default function MaterialTableDemo() {
       }}
     />
   );
-}
+};

@@ -1,17 +1,17 @@
 import createDataContext from "./createDataContext";
 import vastsReducer, { initialState } from "./reducers/vastsReducer";
-import axios, {
+import {
   callGetVastsApi,
   callCreateVastApi,
   callUpdateVastApi,
   callRemoveVastApi
 } from "../api/vastsApi";
 import {
-  ADD_VAST,
   SET_VASTS,
   UPDATE_VAST,
-  SET_ERROR,
-  REMOVE_VAST
+  REMOVE_VAST,
+  ADD_VAST,
+  SET_ERROR
 } from "./actionTypes/vastsActions";
 
 const catchError = (err, dispatch) => {

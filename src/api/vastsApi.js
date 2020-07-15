@@ -49,7 +49,8 @@ export const callRemoveVastApi = async id => {
 };
 
 export const callGetVastXmlApi = async id => {
-  const data = await instance.get(`?id=${id}`);
+  debugger;
+  const { data } = await instance.get(`?id=${id}`);
   return data;
 };
 
